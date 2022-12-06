@@ -1,13 +1,13 @@
 def startOfMarker(str, size):
-    lastFour = []
+    lastCharaters = []
     for i in range(len(str)):
         if i >= size:
-            tmpSet = set(lastFour)
-            if len(tmpSet) != len(lastFour):
-                lastFour.pop(0)
+            tmpSet = set(lastCharaters)
+            if len(tmpSet) != len(lastCharaters):
+                lastCharaters.pop(0)
             else:
                 return i
-        lastFour.append(str[i])
+        lastCharaters.append(str[i])
 
     # if start-of-___ is the last index
     return len(str)
