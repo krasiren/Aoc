@@ -54,6 +54,7 @@ def first(rootDir: Directory, limit: int) -> None:
     print(sum)
 
 def second(rootDir: Directory, maximumDiskSpace: int, requiredSpace: int) -> None:
+    # spaceToFree = required - unused
     spaceToFree = requiredSpace - (maximumDiskSpace - rootDir.size)
     sizeOfDirToDelete = rootDir.findSmallestDirToDelete(rootDir.size, spaceToFree)
     print(sizeOfDirToDelete)
