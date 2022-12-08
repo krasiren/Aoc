@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def makeVisibleTreesMatrix(lines: list[str]) -> list[list[int]]:
     # len(lines) == len(lines[0]) -> True => kvadratna matrika
     n = len(lines)
@@ -26,7 +27,7 @@ def makeVisibleTreesMatrix(lines: list[str]) -> list[list[int]]:
                 visibleTrees[i][-(j+1)] = 1
             if peakR == peakL:
                 break
-    
+
     # trees visible from top and bottom
     for j in range(1, n-1):
         # from top
@@ -54,6 +55,7 @@ def makeVisibleTreesMatrix(lines: list[str]) -> list[list[int]]:
         visibleTrees[x, y] = 1
     return visibleTrees
 
+
 def viewingDistance(lines: list[str], i: int, j: int, hor: bool, s: int) -> int:
     n = len(lines)
     ii, jj = (i+s, j) if hor else (i, j+s)
@@ -62,6 +64,7 @@ def viewingDistance(lines: list[str], i: int, j: int, hor: bool, s: int) -> int:
         d += 1
         ii, jj = (ii+s, jj) if hor else (ii, jj+s)
     return d
+
 
 def makeScenicScoreMatrix(trees: list[list[int]], lines: list[str]) -> list[list[int]]:
     n = len(lines)
@@ -73,15 +76,18 @@ def makeScenicScoreMatrix(trees: list[list[int]], lines: list[str]) -> list[list
                 directions = [(a, b) for a in (1, 0) for b in (1, -1)]
                 for hor, s in directions:
                     scenicScores[i, j] *= viewingDistance(lines, i, j, hor, s)
-                
+
     return scenicScores
+
 
 def first(trees: list[list[int]]) -> None:
     print(np.sum(trees))
 
+
 def second(trees: list[list[int]], lines: list[str]) -> None:
     scenicScores = makeScenicScoreMatrix(trees, lines)
     print(np.max(scenicScores))
+
 
 # not the pretties code of mine but i've tried
 # it's quite optimal tho (for loops in 'makeVisibleTreesMatrix')
