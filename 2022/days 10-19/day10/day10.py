@@ -15,28 +15,29 @@ def first(lines: list[str]) -> None:
     print(sum)
 
 
+def write(cyc: int, x: int, out: str) -> tuple[str, int]:
+    if cyc == 40:
+        out += '\n'
+        cyc = cyc - 40
+    if cyc == x-1 or cyc == x or cyc == x+1:
+        out += '#'
+    else:
+        out += '.'
+
+    return out, cyc
+
+
 def second(lines: list[str]) -> None:
     out = ''
     cycle = 0
     x = 1
     for line in lines:
-        if cycle == 40:
-            out += '\n'
-            cycle = cycle - 40
-        if cycle == x-1 or cycle == x or cycle == x+1:
-            out += '#'
-        else:
-            out += '.'
+        out, cycle = write(cycle, x, out)
 
+        # if command is 'noop' skip this
         if line[0] == 'a':
             cycle += 1
-            if cycle == 40:
-                out += '\n'
-                cycle = cycle - 40
-            if cycle == x-1 or cycle == x or cycle == x+1:
-                out += '#'
-            else:
-                out += '.'
+            out, cycle = write(cycle, x, out)
             x += int(line.split(' ')[1])
 
         cycle += 1
