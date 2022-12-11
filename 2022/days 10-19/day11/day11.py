@@ -59,9 +59,7 @@ def doRounds(monkes: list[Monke], rounds: int, div: bool) -> list[int]:
     small then."""
     monkCounts = [0] * len(monkes)
     divisor = (3 if div else getCommon(monkes))
-    print(divisor)
-    for i in range(rounds):
-        print(i)
+    for _ in range(rounds):
         for monk in monkes:
             for x in monk.items:
                 monkCounts[monkes.index(monk)] += 1
@@ -80,17 +78,13 @@ def doRounds(monkes: list[Monke], rounds: int, div: bool) -> list[int]:
     return monkCounts
 
 
-def first(input: str) -> None:
-    monkes = makeMonkes(input)
+def first(monkes: list[Monke]) -> None:
     monkCounts = doRounds(monkes, 20, True)
-
     print(monkCounts, monkCounts[0] * monkCounts[1])
 
 
-def second(input: str) -> None:
-    monkes = makeMonkes(input)
+def second(monkes: list[Monke]) -> None:
     monkCounts = doRounds(monkes, 10000, False)
-
     print(monkCounts, monkCounts[0] * monkCounts[1])
 
 
@@ -98,5 +92,7 @@ if __name__ == "__main__":
     with open('in.txt') as f:
         input = f.read()
 
-    first(input)
-    second(input)
+    mnkos = makeMonkes(input)
+
+    first(mnkos)
+    second(mnkos)
