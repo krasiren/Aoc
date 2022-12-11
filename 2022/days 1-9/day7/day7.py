@@ -44,8 +44,9 @@ class Directory:
             currentMinimum = self.size
         dir: Directory
         for dir in self.subDirs:
-            currentMinimum = dir.findSmallestDirToDelete(currentMinimum, lowerThreshold)
-        
+            currentMinimum = dir.findSmallestDirToDelete(
+                currentMinimum, lowerThreshold)
+
         return currentMinimum
 
 
@@ -53,11 +54,14 @@ def first(rootDir: Directory, limit: int) -> None:
     sum = rootDir.sumDirsSmallerOrEqualThan(limit)
     print(sum)
 
+
 def second(rootDir: Directory, maximumDiskSpace: int, requiredSpace: int) -> None:
     # spaceToFree = required - unused
     spaceToFree = requiredSpace - (maximumDiskSpace - rootDir.size)
-    sizeOfDirToDelete = rootDir.findSmallestDirToDelete(rootDir.size, spaceToFree)
+    sizeOfDirToDelete = rootDir.findSmallestDirToDelete(
+        rootDir.size, spaceToFree)
     print(sizeOfDirToDelete)
+
 
 if __name__ == "__main__":
     with open('in.txt') as f:
