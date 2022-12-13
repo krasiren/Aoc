@@ -42,22 +42,19 @@ def first(input: str) -> None:
         a, b = pair.split('\n')[0], pair.split('\n')[1]
         a, b = makeList(a), makeList(b)
 
-        if order(a, b) == True:
+        if order(a, b) == 1:
             sum += i+1
 
     print(sum)
 
 
 def second(input: str, x, y) -> None:
-    ls = []
+    ls = [x, y]
     pairs = input.split('\n\n')
     for pair in pairs:
         a, b = pair.split('\n')[0], pair.split('\n')[1]
-        a, b = makeList(a), makeList(b)
-        ls.append(a)
-        ls.append(b)
-    ls.append(x)
-    ls.append(y)
+        ls.append(makeList(a))
+        ls.append(makeList(b))
 
     ls = sorted(ls, key=cmp_to_key(order), reverse=True)
     i, j = ls.index(x)+1, ls.index(y)+1
