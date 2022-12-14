@@ -55,10 +55,8 @@ def makeRocks(lines: list[str]) -> tuple[list[list[int]], int]:
             x.append(int(p[0]) - (500 - (y2+2)))
             y.append(int(p[1]))
         for i in range(len(x) - 1):
-            a, b = (x[i], x[i+1]) if min(x[i], x[i+1]
-                                         ) == x[i] else (x[i+1], x[i])
-            c, d = (y[i], y[i+1]) if min(y[i], y[i+1]
-                                         ) == y[i] else (y[i+1], y[i])
+            a, b = (x[i], x[i+1]) if x[i] <= x[i+1] else (x[i+1], x[i])
+            c, d = (y[i], y[i+1]) if y[i] <= y[i+1] else (y[i+1], y[i])
             ro[c:d+1, a:b+1] = 1
 
     ro[-1, :] = 1       # floor
@@ -100,7 +98,7 @@ def first(rocks: list[list[int]], offset: int) -> None:
         count += 1
         # uncomment to see where each grain of sand stops
         # saveMatrix(rocks)
-        # time.sleep(0.5)
+        # time.sleep(0.2)
 
     count -= 1
     # uncomment to see final output
@@ -115,7 +113,7 @@ def second(rocks: list[list[int]], offset: int) -> None:
         count += 1
         # uncomment to see where each grain of sand stops
         # saveMatrix(rocks)
-        # time.sleep(0.5)
+        # time.sleep(0.15)
 
     # uncomment to see final output
     # saveMatrix(rocks)
@@ -123,11 +121,16 @@ def second(rocks: list[list[int]], offset: int) -> None:
 
 
 if __name__ == "__main__":
-    """Part 1 < 1s, part 2 ~ 5s"""
+    """Part 1 < 1s, part 2 ~ 7s"""
     with open('in.txt') as f:
         input = f.read().splitlines()
 
     rocks, offset = makeRocks(input)
 
+    start = time.time()
     first(rocks, offset)
+
     second(rocks, offset)
+    end = time.time()
+
+    print(end-start)
